@@ -4,7 +4,7 @@ import serial
 import json
 import subprocess
 
-port = "/dev/pts/6"
+port = "/dev/pts/2"
 baud = 115200
 id = 5
 
@@ -33,8 +33,7 @@ def start_display(text):
         '--led-pwm-dither-bits=2 ' + \
         '-f %s10x20.bdf %s' % (dir, text)
 
-    subprocess.run(command, shell=True, stdout=subprocess.PIPE,
-                   stderr=subprocess.PIPE, text=True)
+    subprocess.Popen(command, shell=True)
     print(command)
 
 
