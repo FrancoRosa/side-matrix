@@ -1,0 +1,1 @@
+sudo ./demo -D1 --led-cols=64 --led-rows=32 --led-multiplexing=0 --led-slowdown-gpio=5 --led-brightness=100 --led-show-refresh --led-pwm-dither-bits=2 --led-chain=2
