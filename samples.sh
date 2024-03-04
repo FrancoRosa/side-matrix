@@ -1,1 +1,1 @@
-sudo ./demo -D1 --led-cols=64 --led-rows=32 --led-multiplexing=0 --led-slowdown-gpio=5 --led-brightness=100 --led-show-refresh --led-pwm-dither-bits=2 --led-chain=2
+sudo /home/pi/rpi-rgb-led-matrix/examples-api-use/scrolling-text-example --led-cols=64 --led-rows=32 --led-chain=2 --led-multiplexing=0 --led-slowdown-gpio=5 --led-brightness=100 --led-show-refresh --led-pwm-dither-bits=2 -f /home/pi/rpi-rgb-led-matrix/examples-api-use/10x20.bdf Aeropuerto - Molino - Terminal
