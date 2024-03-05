@@ -6,7 +6,9 @@ import subprocess
 
 port = "/dev/pts/2"
 baud = 9600
-id = 3
+id = 1
+uppercase = True
+chain = 2
 
 
 dir = "/home/pi/rpi-rgb-led-matrix/examples-api-use/"
@@ -21,28 +23,29 @@ def stop_display():
     print(command)
 
 
-def start_display(text):
+def start_display(text, speed, brightness):
     stop_display()
     print("... start display")
 
     command = 'sudo %s' % (dir) + \
         'scrolling-text-example ' + \
-        '--led-cols=64 --led-rows=32 --led-chain=2 ' + \
+        '--led-cols=64 --led-rows=32 --led-chain=%d ' % chain + \
         '--led-multiplexing=0 --led-slowdown-gpio=5 ' + \
-        '--led-brightness=10 ' + \
+        '--led-brightness=%d ' % brightness + \
         '--led-pwm-dither-bits=2 ' + \
-        '-f %s10x20.bdf %s' % (dir, text)
+        '-f %sShareTechMono-Regular-30.bdf -y 5 -s %s %s' % (
+            dir, speed, text.upper() if uppercase else text)
 
     subprocess.Popen(command, shell=True)
     print(command)
 
 
-def get_text(index):
+def get_text(index, speed, brightness):
     with open('texts.json', 'r') as file:
         texts = json.load(file)
         try:
             text = " - ".join(texts[index])
-            start_display(text)
+            start_display(text, speed, brightness)
             return text
         except Exception as e:
             print(e)
@@ -52,8 +55,13 @@ def get_text(index):
 def process_line(line):
     try:
         if int(line[0]) == id:
-            index = line[1:4]
-            print(get_text(index))
+            index = line[19:22]
+            speed = line[22]
+            brightness = line[23]
+            print(index, speed, brightness)
+            brightness = 10*(int(line[23]) + 1)
+
+            print(get_text(index, speed, brightness))
     except Exception as e:
         print(e)
         pass
