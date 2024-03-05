@@ -29,7 +29,7 @@ def start_display(text):
         'scrolling-text-example ' + \
         '--led-cols=64 --led-rows=32 --led-chain=2 ' + \
         '--led-multiplexing=0 --led-slowdown-gpio=5 ' + \
-        '--led-brightness=100 ' + \
+        '--led-brightness=10 ' + \
         '--led-pwm-dither-bits=2 ' + \
         '-f %s10x20.bdf %s' % (dir, text)
 
@@ -50,9 +50,13 @@ def get_text(index):
 
 
 def process_line(line):
-    if int(line[0]) == id:
-        index = line[1:4]
-        print(get_text(index))
+    try:
+        if int(line[0]) == id:
+            index = line[1:4]
+            print(get_text(index))
+    except Exception as e:
+        print(e)
+        pass
 
 
 while True:
