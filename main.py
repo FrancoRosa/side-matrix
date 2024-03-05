@@ -5,8 +5,8 @@ import json
 import subprocess
 
 port = "/dev/pts/2"
-baud = 115200
-id = 5
+baud = 9600
+id = 3
 
 
 dir = "/home/pi/rpi-rgb-led-matrix/examples-api-use/"
@@ -51,7 +51,7 @@ def get_text(index):
 
 def process_line(line):
     if int(line[0]) == id:
-        index = line[1:3]
+        index = line[1:4]
         print(get_text(index))
 
 
